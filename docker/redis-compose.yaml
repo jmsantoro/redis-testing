@@ -1,0 +1,22 @@
+services:
+  redis:
+    image: docker.io/bitnami/redis:7.4
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/data/redis:/data
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    ports:
+      - "5540:5440"
+    depends_on:
+      - redis
+    volumes:
+      - ~/data/redisinsight:/db
+    environment:
+      - REDIS_URI=redis://redis:6379
