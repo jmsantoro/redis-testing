@@ -1,0 +1,15 @@
+auth:
+  enabled: false
+  ecistingSecret: ""
+  existingSecretPasswordKey: ""
+  password: ""
+  usePasswordFileFromSecret: false
+  usePasswordFile: false
+master:
+  persistence:
+    existingClaim: "local-host-pvc"
+
+volumePermissions:
+  ## @param volumePermissions.enabled Enable init container that changes the owner/group of the PV mount point to `runAsUser:fsGroup`
+  ##
+  enabled: true

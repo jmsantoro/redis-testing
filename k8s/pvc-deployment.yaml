@@ -1,11 +1,27 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-host-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/home/e18680/dev/data/redis"
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: example-pvc
+  name: local-host-pvc
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: managed-premium
+  storageClassName: manual
   resources:
     requests:
       storage: 5Gi
